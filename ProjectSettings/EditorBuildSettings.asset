@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StarWarsLevel.unity
+    guid: d60b9a8dc0e3a214cb85d7641a933e3f
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 7de9a91c9efde5e40aa1e8c3687fc38a, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: a1986bcd90a9a874a9705a543020bf3e, type: 2}

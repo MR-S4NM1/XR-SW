@@ -8,6 +8,7 @@ public class TurretCode : MonoBehaviour
 
     [SerializeField] protected Transform _bulletPos;
     [SerializeField] protected Transform _turretOrigin;
+    [SerializeField] protected AudioSource _audioSource;
 
     #endregion
 
@@ -21,7 +22,7 @@ public class TurretCode : MonoBehaviour
 
     void Start()
     {
-        
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -42,6 +43,7 @@ public class TurretCode : MonoBehaviour
             _bullet.GetComponent<BulletCode>()._bulletDirection = 
                 (_bulletPos.position - _turretOrigin.position).normalized;
             _bullet.SetActive(true);
+            _audioSource.Play();
         }
     }
 

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,25 +10,44 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    [SerializeField] protected Canvas _rotationCanvas;
+    [SerializeField] protected Canvas _victoryCanvas;
+
+    [SerializeField] protected ActionBasedContinuousTurnProvider _continousTurnProvider;
+    [SerializeField] protected ActionBasedSnapTurnProvider _snapTurnProvider;
+
+    [SerializeField] protected GameObject _initialBlockGroup;
+
     [SerializeField] protected GameObject[] _turrets;
     [SerializeField] protected GameObject[] _lightsabers;
     [SerializeField] protected GameObject[] _platforms;
     [SerializeField] protected GameObject _floor;
     [SerializeField] protected GameObject _finalTrigger;
 
+    [SerializeField] protected GameObject _alarmGO;
+
     [SerializeField] protected MeshRenderer _buttonMeshRenderer;
     [SerializeField] protected Material _buttonOffMaterial;
     [SerializeField] protected Material _buttonOnMaterial;
+
+    [SerializeField] protected Transform _playersTransform;
+    [SerializeField] protected Transform _platformsTransform;
 
     #endregion
 
     #region UnityMethods
 
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
+
     private void Start()
     {
-        //_buttonMeshRenderer.material = _buttonOffMaterial;
-
-        ActivateLevelEvents();
+        _buttonMeshRenderer.material = _buttonOffMaterial;
     }
 
 
@@ -39,9 +60,31 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ActivateObjectsAndCollapseFloor());
     }
 
-    public void ChangeToVictoryScene()
+    public void ShowVictoryCanvas()
     {
+        //SceneChanger.instance.ChangeSceneTo(1);
+        _victoryCanvas.gameObject.SetActive(true);
+    }
 
+    public void ReturnPlayerToPlatform()
+    {
+        _playersTransform.position = _platformsTransform.position;
+    }
+
+    public void ActivateSnapRotation()
+    {
+        _snapTurnProvider.enabled = true;
+        _continousTurnProvider.enabled = false;
+        _rotationCanvas.gameObject.SetActive(false);
+        _initialBlockGroup.gameObject.SetActive(false);
+    }
+
+    public void ActivateContinousRotation()
+    {
+        _snapTurnProvider.enabled = false;
+        _continousTurnProvider.enabled = true;
+        _rotationCanvas.gameObject.SetActive(false);
+        _initialBlockGroup.gameObject.SetActive(false);
     }
 
     #endregion
@@ -53,6 +96,8 @@ public class GameManager : MonoBehaviour
         _buttonMeshRenderer.material = _buttonOnMaterial;
 
         _finalTrigger.gameObject.SetActive(true);
+
+        _alarmGO.gameObject.SetActive(true);
 
         foreach (GameObject turret in _turrets)
         {

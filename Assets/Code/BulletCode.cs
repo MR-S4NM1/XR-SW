@@ -48,7 +48,8 @@ public class BulletCode : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Wall"))
+        if (other.gameObject.CompareTag("Wall") ||
+            other.gameObject.CompareTag("Lightsaber"))
         {
             gameObject.SetActive(false);
         }

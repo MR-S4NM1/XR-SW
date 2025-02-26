@@ -8,6 +8,7 @@ TagManager:
   - Lightsaber
   - Return
   - Final
+  - Bullet
   layers:
   - Default
   - TransparentFX

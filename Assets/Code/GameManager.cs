@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] protected GameObject _initialBlockGroup;
 
-    [SerializeField] protected GameObject[] _turrets;
+    [SerializeField] protected TurretCode[] _turrets;
+
     [SerializeField] protected GameObject[] _lightsabers;
     [SerializeField] protected GameObject[] _platforms;
     [SerializeField] protected GameObject _floor;
@@ -99,9 +100,9 @@ public class GameManager : MonoBehaviour
 
         _alarmGO.gameObject.SetActive(true);
 
-        foreach (GameObject turret in _turrets)
+        foreach (TurretCode turret in _turrets)
         {
-            turret.SetActive(true);
+            turret.ShootingRoutine();
         }
 
         foreach (GameObject lightsabers in _lightsabers)

@@ -9,6 +9,7 @@ public class TurretCode : MonoBehaviour
     [SerializeField] protected Transform _bulletPos;
     [SerializeField] protected Transform _turretOrigin;
     [SerializeField] protected AudioSource _audioSource;
+    [SerializeField] protected Light _light;
 
     #endregion
 
@@ -22,16 +23,16 @@ public class TurretCode : MonoBehaviour
 
     void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
-    }
-
-    private void OnEnable()
-    {
-        StopAllCoroutines();
-        StartCoroutine(ShootingCoroutine());
+        if (_audioSource == null)
+        {
+            _audioSource = GetComponent<AudioSource>();
+        }
+        _light.gameObject.SetActive(false);
     }
 
     #endregion
+
+    #region LocalMethods
 
     protected virtual void Shoot()
     {
@@ -53,4 +54,18 @@ public class TurretCode : MonoBehaviour
         Shoot();
         StartCoroutine(ShootingCoroutine());
     }
+
+    #endregion
+
+    #region PublicMethods
+
+    public void ShootingRoutine()
+    {
+        StopAllCoroutines();
+        StartCoroutine(ShootingCoroutine());
+        _light.gameObject.SetActive(true);
+    }
+
+
+    #endregion
 }

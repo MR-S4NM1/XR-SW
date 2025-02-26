@@ -343,7 +343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4000013053745136
 Transform:
   m_ObjectHideFlags: 0
@@ -448,7 +448,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPos: {fileID: 860376927}
   _turretOrigin: {fileID: 198590225}
-  _audioSource: {fileID: 0}
+  _audioSource: {fileID: 1107606152}
+  _light: {fileID: 2021946329}
 --- !u!82 &1107606152
 AudioSource:
   m_ObjectHideFlags: 0
